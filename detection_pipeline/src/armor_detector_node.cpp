@@ -18,8 +18,8 @@ ArmorDetectorNode::ArmorDetectorNode() : Node("armor_detector_node"), frame_coun
 {
     // Subscribe to the camera publisher topic
     image_sub_ = this->create_subscription<sensor_msgs::msg::Image>(
-        /* TODO: What topic are we subscribing to? What is its name? */, rclcpp::SensorDataQoS(),
-        std::bind(&/* TODO: What method in this class uses the topic message? */, this, std::placeholders::_1));
+        "camera/image_raw", rclcpp::SensorDataQoS(),
+        std::bind(&ArmorDetectorNode::image_callback, this, std::placeholders::_1));
 
     RCLCPP_INFO(this->get_logger(), "ArmorDetectorNode subscribed to topic");
 }
@@ -46,10 +46,10 @@ void ArmorDetectorNode::image_callback(const sensor_msgs::msg::Image::SharedPtr 
         RCLCPP_ERROR(this->get_logger(), "cv_bridge exception: %s", e.what());
         return;
     }
-
+    /*
     std::vector<cv::RotatedRect> armors = search(frame, lowerHSV, upperHSV, lowerHSV2, upperHSV2);
     frame_count++;
-
+    
     if (armors.size() == 2)
     {
         auto p0 = rect_to_point(armors[0]);
@@ -63,6 +63,8 @@ void ArmorDetectorNode::image_callback(const sensor_msgs::msg::Image::SharedPtr 
     {
         std::cout << frame_count << "," << "no armor found" << std::endl;
     }
+
+    */
 
     // Reduce the computational load and just show every 5th image
     if (frame_count % 5 == 0)
@@ -104,8 +106,9 @@ int main(int argc, char **argv)
  */
 std::vector<cv::RotatedRect> ArmorDetectorNode::search(cv::Mat& frame, cv::Scalar lowerHSV, cv::Scalar upperHSV, cv::Scalar lowerHSV2, cv::Scalar upperHSV2) {
     // TODO: Complete the rest of the method. The onboarding instructions document will be very helpful.
-
+    cv::Mat preProcessedFrame;
     // 1) Image Preprocessing
+    cv::cvtColor(frame, preProcessedFrame, cv::BGR2HSV);
 
     // 2) Color segmentation
 
