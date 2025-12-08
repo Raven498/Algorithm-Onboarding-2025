@@ -108,18 +108,19 @@ int main(int argc, char **argv)
 cv::Mat ArmorDetectorNode::search(cv::Mat& frame, cv::Scalar lowerHSV, cv::Scalar upperHSV, cv::Scalar lowerHSV2, cv::Scalar upperHSV2) {
     // TODO: Complete the rest of the method. The onboarding instructions document will be very helpful.
     cv::Mat preProcessedFrame;
+    cv::Mat thresholdFrame;
     // 1) Image Preprocessing
     cv::cvtColor(frame, preProcessedFrame, cv::COLOR_BGR2HSV);
 
     // 2) Color segmentation
-
+    cv::inRange(preProcessedFrame, lowerHSV, upperHSV, thresholdFrame);
     // 2.5) Edge Detection
     
     // 3) Contour Detection
 
     // 4) Contour Filtering
 
-    return preProcessedFrame; // Default return value, no armor found
+    return thresholdFrame; // Default return value, no armor found
 }
 
 /*
