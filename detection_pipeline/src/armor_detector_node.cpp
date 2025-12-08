@@ -109,13 +109,15 @@ cv::Mat ArmorDetectorNode::search(cv::Mat& frame, cv::Scalar lowerHSV, cv::Scala
     // TODO: Complete the rest of the method. The onboarding instructions document will be very helpful.
     cv::Mat preProcessedFrame;
     cv::Mat thresholdFrame;
+    cv::Mat edges;
     // 1) Image Preprocessing
     cv::cvtColor(frame, preProcessedFrame, cv::COLOR_BGR2HSV);
 
     // 2) Color segmentation
     cv::inRange(preProcessedFrame, lowerHSV, upperHSV, thresholdFrame);
     // 2.5) Edge Detection
-    
+    cv::Canny(thresholdFrame, edges, 100, 200);
+
     // 3) Contour Detection
 
     // 4) Contour Filtering
