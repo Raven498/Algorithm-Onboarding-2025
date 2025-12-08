@@ -46,10 +46,10 @@ void ArmorDetectorNode::image_callback(const sensor_msgs::msg::Image::SharedPtr 
         RCLCPP_ERROR(this->get_logger(), "cv_bridge exception: %s", e.what());
         return;
     }
-    /*
-    std::vector<cv::RotatedRect> armors = search(frame, lowerHSV, upperHSV, lowerHSV2, upperHSV2);
+    // std::vector<cv::RotatedRect> armors
+    cv::Mat output = search(frame, lowerHSV, upperHSV, lowerHSV2, upperHSV2);
     frame_count++;
-    
+    /*
     if (armors.size() == 2)
     {
         auto p0 = rect_to_point(armors[0]);
@@ -69,7 +69,7 @@ void ArmorDetectorNode::image_callback(const sensor_msgs::msg::Image::SharedPtr 
     // Reduce the computational load and just show every 5th image
     if (frame_count % 5 == 0)
     {
-        show_frame(frame);
+        show_frame(output);
     }
 }
 
@@ -103,8 +103,9 @@ int main(int argc, char **argv)
 /*
  *  This method will search a frame for armor plates and return the RotatedRect objects that correspond to the two light
  *  bars that exist on an armor plate.
+ * Original return: std::vector<cv::RotatedRect>
  */
-std::vector<cv::RotatedRect> ArmorDetectorNode::search(cv::Mat& frame, cv::Scalar lowerHSV, cv::Scalar upperHSV, cv::Scalar lowerHSV2, cv::Scalar upperHSV2) {
+cv::Mat ArmorDetectorNode::search(cv::Mat& frame, cv::Scalar lowerHSV, cv::Scalar upperHSV, cv::Scalar lowerHSV2, cv::Scalar upperHSV2) {
     // TODO: Complete the rest of the method. The onboarding instructions document will be very helpful.
     cv::Mat preProcessedFrame;
     // 1) Image Preprocessing
@@ -118,7 +119,7 @@ std::vector<cv::RotatedRect> ArmorDetectorNode::search(cv::Mat& frame, cv::Scala
 
     // 4) Contour Filtering
 
-    return {}; // Default return value, no armor found
+    return preProcessedFrame; // Default return value, no armor found
 }
 
 /*
