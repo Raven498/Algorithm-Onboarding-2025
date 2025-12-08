@@ -108,7 +108,7 @@ std::vector<cv::RotatedRect> ArmorDetectorNode::search(cv::Mat& frame, cv::Scala
     // TODO: Complete the rest of the method. The onboarding instructions document will be very helpful.
     cv::Mat preProcessedFrame;
     // 1) Image Preprocessing
-    cv::cvtColor(frame, preProcessedFrame, cv::BGR2HSV);
+    cv::cvtColor(frame, preProcessedFrame, cv::COLOR_BGR2HSV);
 
     // 2) Color segmentation
 
