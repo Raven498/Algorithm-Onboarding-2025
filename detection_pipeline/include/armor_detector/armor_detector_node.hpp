@@ -54,7 +54,8 @@ class ArmorDetectorNode : public rclcpp::Node {
         void show_frame(cv::Mat &frame);
 
         // Armor detection methods
-        std::vector<cv::RotatedRect> search(cv::Mat &frame, cv::Scalar lowerHSV, cv::Scalar upperHSV, cv::Scalar lowerHSV2, cv::Scalar upperHSV2);
+        //std::vector<cv::RotatedRect>
+        cv::Mat search(cv::Mat &frame, cv::Scalar lowerHSV, cv::Scalar upperHSV, cv::Scalar lowerHSV2, cv::Scalar upperHSV2);
         bool is_light_bar(cv::RotatedRect &rect);
         bool is_armor(cv::RotatedRect &left_rect, cv::RotatedRect &right_rect);
         void draw_rotated_rect(cv::Mat &frame, cv::RotatedRect &rect);
