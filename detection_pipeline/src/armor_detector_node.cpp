@@ -130,7 +130,7 @@ cv::Mat ArmorDetectorNode::search(cv::Mat& frame, cv::Scalar lowerHSV, cv::Scala
     {
         cv::Scalar color = cv::Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
         std::cout << cv::contourArea(contours[(int)i]) << "\n";
-        if (cv::contourArea(contours[(int)i]) >= 5 && cv::contourArea(contours[(int)i]) <= 30) {
+        if (cv::contourArea(contours[(int)i]) >= 0 && cv::contourArea(contours[(int)i]) <= 50) {
             cv::drawContours(drawing, contours, (int)i, color, 2, cv::LINE_8, hierarchy, 0);
         }
     }
