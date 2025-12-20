@@ -125,7 +125,7 @@ cv::Mat ArmorDetectorNode::search(cv::Mat& frame, cv::Scalar lowerHSV, cv::Scala
     // 3) Contour Detection
     cv::findContours(edges, contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE);
 
-    drawing = cv::Mat::zeros(edges.size(), cv::CV_8UC3);
+    drawing = cv::Mat::zeros(edges.size(), CV_8UC3);
     for (size_t i = 0; i < contours.size(); i++)
     {
         cv::Scalar color = cv::Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
