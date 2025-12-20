@@ -111,9 +111,9 @@ cv::Mat ArmorDetectorNode::search(cv::Mat& frame, cv::Scalar lowerHSV, cv::Scala
     cv::Mat thresholdFrame;
     cv::Mat edges;
     cv::Mat drawing;
-    vector<vector<Point> > contours;
-    vector<Vec4i> hierarchy;
-    RNG rng(12345);
+    std::vector<vector<cv::Point> > contours;
+    std::vector<cv::Vec4i> hierarchy;
+    cv::RNG rng(12345);
     // 1) Image Preprocessing
     cv::cvtColor(frame, preProcessedFrame, cv::COLOR_BGR2HSV);
 
@@ -123,13 +123,13 @@ cv::Mat ArmorDetectorNode::search(cv::Mat& frame, cv::Scalar lowerHSV, cv::Scala
     cv::Canny(thresholdFrame, edges, 100, 200);
 
     // 3) Contour Detection
-    cv::findContours(canny_output, contours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE);
+    cv::findContours(canny_output, contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE);
 
-    drawing = Mat::zeros(canny_output.size(), CV_8UC3);
+    drawing = cv::Mat::zeros(canny_output.size(), cv::CV_8UC3);
     for (size_t i = 0; i < contours.size(); i++)
     {
-        Scalar color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
-        cv::drawContours(drawing, contours, (int)i, color, 2, LINE_8, hierarchy, 0);
+        cv::Scalar color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
+        cv::drawContours(drawing, contours, (int)i, color, 2, cv::LINE_8, hierarchy, 0);
     }
     // 4) Contour Filtering
 
