@@ -129,7 +129,9 @@ cv::Mat ArmorDetectorNode::search(cv::Mat& frame, cv::Scalar lowerHSV, cv::Scala
     for (size_t i = 0; i < contours.size(); i++)
     {
         cv::Scalar color = cv::Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
-        cv::drawContours(drawing, contours, (int)i, color, 2, cv::LINE_8, hierarchy, 0);
+        if (cv::contourArea(contours[(int)i]) >= 50 && cv::contourArea(contours[(int)i]) <= 200) {
+            cv::drawContours(drawing, contours, (int)i, color, 2, cv::LINE_8, hierarchy, 0);
+        }
     }
     // 4) Contour Filtering
 
