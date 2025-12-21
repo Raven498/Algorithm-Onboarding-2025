@@ -136,7 +136,7 @@ cv::Mat ArmorDetectorNode::search(cv::Mat& frame, cv::Scalar lowerHSV, cv::Scala
     }
     // 4) Contour Filtering
 
-    return thresholdFrame; // Default return value, no armor found
+    return edges; // Default return value, no armor found
 }
 
 /*
