@@ -118,7 +118,7 @@ cv::Mat ArmorDetectorNode::search(cv::Mat& frame, cv::Scalar lowerHSV, cv::Scala
     cv::cvtColor(frame, preProcessedFrame, cv::COLOR_BGR2HSV);
 
     // 2) Color segmentation
-    cv::inRange(preProcessedFrame, lowerHSV, upperHSV, thresholdFrame);
+    cv::inRange(preProcessedFrame, lowerHSV2, upperHSV2, thresholdFrame);
     // 2.5) Edge Detection
     cv::Canny(thresholdFrame, edges, 50, 150);
 
