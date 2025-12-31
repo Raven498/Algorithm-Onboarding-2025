@@ -3,7 +3,7 @@
 #include <sensor_msgs/msg/image.hpp>
 
 CameraPublisherNode::CameraPublisherNode()
-: Node("camera_publisher_node"), frame_count(0)
+    : Node("camera_publisher_node"), frame_count(0)
 {
     cap = std::make_unique<cv::VideoCapture>(videoPath, cv::CAP_FFMPEG);
 
@@ -46,7 +46,7 @@ void CameraPublisherNode::publish_frame()
     RCLCPP_INFO(this->get_logger(), "Published frame %d", frame_count);
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     rclcpp::init(argc, argv);
     auto node = std::make_shared<CameraPublisherNode>();
@@ -54,4 +54,3 @@ int main(int argc, char *argv[])
     rclcpp::shutdown();
     return 0;
 }
-
